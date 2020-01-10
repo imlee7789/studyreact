@@ -1,6 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import { Menu, Input, Button } from 'antd';
+import PropTypes from 'prop-types';
+import { Menu, Input, Button, Row, Col } from 'antd';
+import LoginForm from './LoginForm';
+import UserProfile from './UserProfile';
+
+const dummy = {
+  nickname: '제로초',
+  Post: [],
+  Followings: [],
+  Followers: [],
+  isLoggedIn: false
+};
 
 const AppLayout = ({ children }) => {
   return (
@@ -13,9 +24,25 @@ const AppLayout = ({ children }) => {
         </Menu.Item>
       </Menu>
       <Link href="/signup"><Button>회원가입</Button></Link>
-      {children}
+      <Row gutter={8}>
+        <Col xs={24} md={6}>
+          {dummy.isLoggedIn
+            ? <UserProfile /> : <LoginForm />
+          }
+        </Col>
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          <Link href="//www.zerocho.com/" ><a target="_blank">Made by Henley</a></Link>
+        </Col>
+      </Row>
     </div>
   );
+};
+
+AppLayout.prototype = {
+  children: PropTypes.node,
 };
 
 export default AppLayout;
