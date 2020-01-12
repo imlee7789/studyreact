@@ -1,5 +1,14 @@
 export const initialState = {
-  mainPosts: [],
+  mainPosts: [{
+    User: {
+      id: 1,
+      nickname: '제로초',
+    },
+		content: '첫 번째 게시글',
+		img: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F2149683A58CA6BF31324DD'
+  }],
+  
+	imagePaths: [],
 };
 
 const ADD_POST = 'ADD_POST';
@@ -19,7 +28,7 @@ const addDummy = {
   },
 };
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
       return {
@@ -39,5 +48,3 @@ const reducer = (state = initialState, action) => {
     }
   }
 };
-
-export default reducer;

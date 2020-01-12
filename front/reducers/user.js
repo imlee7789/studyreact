@@ -1,31 +1,42 @@
+const dummyUser = {
+  nickname: '제로초',
+  Post: [],
+  Followings: [],
+  Followers: [],
+};
+
 export const initialState = {
   isLoggedIn: false,
-  user: {},
+  user: null,
 };
 
 // Action name, Action, reducer는 react에서 setState와 같다.
 // Action name
-const LOG_IN = 'LOG_IN';
-const LOG_OUT = 'LOG_OUT';
+export const SIGN_UP = 'SIGN_UP';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
 
 // Action
-const loginAction = {
-  type: LOG_IN,
-  data: {
-    nickname: '제로초',
-  },
+export const signUpAction = (data) => {
+  return {
+    type: SIGN_UP,
+    data: data,
+  };
 };
-const logoutAction = {
+export const loginAction = {
+  type: LOG_IN,
+};
+export const logoutAction = {
   type: LOG_OUT,
 };
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN: {
       return {
         ...state,
         isLoggedIn: true,
-        user: action.data,
+        user: dummyUser,
       };
     }
     case LOG_OUT: {
@@ -35,6 +46,12 @@ const reducer = (state = initialState, action) => {
         user: null,
       };
     }
+    case SIGN_UP: {
+      return {
+        ...state,
+        signUpData: action.data,
+      };
+    }
     default: {
       return {
         ...state,
@@ -42,5 +59,3 @@ const reducer = (state = initialState, action) => {
     }
   }
 };
-
-export default reducer;
